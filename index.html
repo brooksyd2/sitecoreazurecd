@@ -112,8 +112,9 @@
 public AzureDeployments GetDeployments()
 {
 
-	var azureDeployments = new AzureDeployments
-							   {SubscriptionId = _configurationProvider.Settings.SubscriptionId};
+	var azureDeployments = new AzureDeployments {
+		SubscriptionId = _configurationProvider.Settings.SubscriptionId
+	};
 
 	//Get list of environments
 	IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
@@ -163,7 +164,7 @@ public AzureDeployments GetDeployments()
             </pre>
         </div>
 
-        <div class="step evolve" data-x="2200" data-y="3000" data-rotate-z="15" data-z="-500">
+        <div class="step evolve" data-x="2200" data-y="3000" data-rotate-z="15" data-z="-1000">
             <pre>
             <code class="cs">
 public void UpdateFiles()
