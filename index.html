@@ -62,7 +62,7 @@
             </div>
             <div class="rightcontent">
                 <p>
-                    Deployment continues <span class="attention">as normal</span>, up to the Content Management server that has the Sitecore Azure module installed. From there 
+                    Deployment continues <span class="attention">as normal</span>, up to the Content Management server that has the Sitecore Azure module installed. 
                 </p>
             </div>
         </div>
@@ -70,7 +70,7 @@
         <div class="step" data-x="-650" data-y="5000">
            <div class="undercontent">
                 <p>
-					Once code and content is deployed to Content Management, then the Sitecore Azure module is invoked via HTTP Requests to start the deployment process, and later the role swap process
+					Once code and content is deployed to Content Management, then the Sitecore Azure module is invoked via HTTP Requests to start the deployment process, and later the role swap process.
                 </p>
             </div>
         </div>
@@ -96,18 +96,12 @@
 
         <div class="step" data-x="2200" data-y="4000" data-z="0">
             <div class="headersq">
-                <div class="outerContainer"><div class="innerContainer">Decorator Pattern to the Rescue</div></div>
+                <div class="outerContainer"><div class="innerContainer">Adding a Service for Sitecore Azure</div></div>
             </div>
             <div class="rightcontent">
                 <p>
-                    In object-oriented programming, <span class="attention">the decorator pattern</span> (also known as Wrapper,
-                    an alternative naming shared with the Adapter pattern) is a design pattern that <span class="attention">
-                        allows behavior to be added
-                        to an individual object
-                    </span>, either statically or dynamically, <span class="attention">without affecting the behavior of other objects from the same class</span>.
-                </p>
-                <p style="font-size: 80%;">
-                    <br />(source: <a href="http://en.wikipedia.org/wiki/Decorator_pattern">http://en.wikipedia.org/wiki/Decorator_pattern</a>)
+                    We require a Sitecore context to run the Sitecore Azure commands, therefore we need to intercept HTTP requests. 
+					When invoked, the service will find deployments for given subscription, and call 'Upgrade Files' command.
                 </p>
             </div>
         </div>
@@ -115,35 +109,52 @@
         <div class="step" data-x="2200" data-y="3000" data-rotate-z="15" data-z="-500">
             <pre>
             <code class="cs">
-// Service interface
-public interface ISearchService
+public AzureDeployments GetDeployments()
 {
-    ISearchResult Search(SearchCriteria criteria);
-}
-// Concrete decorator will wrap my concrete service
-public class CachingSearchServiceDecorator : ISearchService
-{
-    private readonly ISearchService concreteService;
-    private readonly ICache&lt;ISearchResult&gt; cache;
-    
-    public CachingSearchServiceDecorator(ISearchService concreteService, ICache&lt;ISearchResult&gt; cache)
-    {
-        this.concreteService = concreteService;
-        this.cache = cache;
-    }
-    public ISearchResult Search(SearchCriteria criteria)
-    {
-        var key = "CachingSearchServiceDecorator";
-        if (criteria != null)
-        {
-            key += criteria.GetHashCode().ToString();
-        }
-        if (!cache.ContainsKey(key))
-        {
-            cache.AddEntity(key, concreteService.Search(criteria));
-        }
-        return cache.GetEntity(key);
-    }
+
+	var azureDeployments = new AzureDeployments
+							   {SubscriptionId = _configurationProvider.Settings.SubscriptionId};
+
+	//Get list of environments
+	IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
+		Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(azureDeployments.SubscriptionId);
+
+	if (environments != null)
+	{
+		foreach (var environment in environments)
+		{
+			//Create new environment
+			var azureEnvironment = new AzureEnvironment { EnvironmentId = environment.EnvironmentId, Environment = environment.DisplayName };
+
+			foreach (var deployment in environment.GetDeployments())
+			{
+				//Add deployment to collection
+				azureEnvironment.Deployment.Add(
+					new AzureDeployment
+						{
+							DeploymentId = deployment.ID.ToString(),
+							Location = deployment.WebRole.Farm.Location.Name,
+							DeploymentName = deployment.DisplayName,
+							DeploymentType = deployment.DeploymentType.ToString(),
+							DeploymentSlot = deployment.DeploymentSlot.ToString(),
+							HostedServiceName = deployment.HostedServiceName,
+							Databases = deployment.DatabaseReferences.DisplayName
+						});
+			}
+
+			//Add environment to collection
+			azureDeployments.Deployments.Add(azureEnvironment);
+
+		}
+
+	}
+	else
+	{
+		//Log action
+		Log.Info(string.Format("No deployments found for Subscription ID : {0}", _configurationProvider.Settings.SubscriptionId), this);
+	}
+
+	return azureDeployments;
 }
             </code>
             </pre>
