@@ -163,8 +163,66 @@ public AzureDeployments GetDeployments()
             </code>
             </pre>
         </div>
+		
+		        <div class="step evolve" data-x="2200" data-y="3000" data-rotate-z="15" data-z="-500">
+            <pre>
+            <code class="cs">
+public AzureDeployments GetDeployments()
+{
 
-        <div class="step evolve" data-x="2200" data-y="3000" data-rotate-z="180" data-z="-1500">
+	var azureDeployments = new AzureDeployments {
+		SubscriptionId = <span class="attention">_configurationProvider.Settings.SubscriptionId</span>
+	};
+
+	//Get list of environments
+	IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
+		<span class="attention">Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(azureDeployments.SubscriptionId);</span>
+
+	if (environments != null)
+	{
+		foreach (var environment in environments)
+		{
+			//Create new environment
+			var azureEnvironment = new AzureEnvironment { 
+			EnvironmentId = environment.EnvironmentId, 
+			Environment = environment.DisplayName };
+
+			foreach (var deployment in environment.GetDeployments())
+			{
+				//Add deployment to collection
+				azureEnvironment.Deployment.Add(
+					new AzureDeployment
+						{
+							DeploymentId = deployment.ID.ToString(),
+							Location = deployment.WebRole.Farm.Location.Name,
+							DeploymentName = deployment.DisplayName,
+							DeploymentType = deployment.DeploymentType.ToString(),
+							DeploymentSlot = deployment.DeploymentSlot.ToString(),
+							HostedServiceName = deployment.HostedServiceName,
+							Databases = deployment.DatabaseReferences.DisplayName
+						});
+			}
+
+			//Add environment to collection
+			azureDeployments.Deployments.Add(azureEnvironment);
+
+		}
+
+	}
+	else
+	{
+		//Log action
+		Log.Info(string.Format("No deployments found for Subscription ID : {0}", 
+		_configurationProvider.Settings.SubscriptionId), this);
+	}
+
+	return azureDeployments;
+}
+            </code>
+            </pre>
+        </div>
+
+        <div class="step" data-x="2200" data-y="3000" data-rotate-z="90" data-z="-1500">
             <pre>
             <code class="cs">
 public void UpdateFiles()
@@ -187,80 +245,32 @@ public void UpdateFiles()
             </code>
             </pre>
         </div>
-
-        <div class="step" data-x="3000" data-y="2000" data-rotate="0">
+		
+        <div class="step evolve" data-x="2200" data-y="3000" data-rotate-z="90" data-z="-1500">
             <pre>
             <code class="cs">
-public ISearchResult Search(SearchCriteria criteria)
+public void UpdateFiles()
 {
-    if (criteria == null || string.IsNullOrWhiteSpace(criteria.Text))
-        return new SearchResult();
-    var timer = new Sitecore.Diagnostics.HighResTimer(true);
-    var index = ContentSearchManager.GetIndex("sitecore_master_index");
-    using (var context = index.CreateSearchContext())
-    {
-        Expression&lt;func&lt;SearchResultItem, bool&gt;&gt; predicate = PredicateBuilder.True&lt;SearchResultItem&gt;();
-        foreach(var entry in criteria.Text.Split(' '))
-        {
-            predicate = predicate.And(i => i.Content == entry);
-        }
-                
-        var queryable = context.GetQueryable&lt;SearchResultItem&gt;();
-        var result = queryable
-            .Where(predicate)
-            .Page(criteria.CurrentPage-1, criteria.PageSize)
-            .FacetPivotOn(p => p.FacetOn(d => d["categories"]).FacetOn(d => d["haspoint"]))
-            .GetResults();
-        return new SearchResult()
-        {
-            ResultDocuments = result.Hits.Select(hit => hit.Document).ToList(),
-            Facets = CollectFacets(result.Facets.Categories),
-            TotalSearchResults = result.TotalSearchResults,
-            TotalMilliseconds = timer.ElapsedTimeSpan.Milliseconds;
-        };
-    }
+	//If no subscriptionId passed in parameters then use configuration provided id
+	var subscriptionId = _configurationProvider.Settings.SubscriptionId;
+
+	//Get list of environments
+	IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
+		<span class="attention">Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(subscriptionId)</span>;
+
+	//Loop through environments and deployments
+	foreach (var deployment in environments.SelectMany(environment => AzureDeploymentManager.Current.GetDeployments(environment)))
+	{
+		<span class="attention">AzureDeploymentManager.Current.UpgradeDeploymentAsync(deployment)</span>;
+
+		Log.Info(string.Format("Updated deployment : {0}", deployment.DisplayName), this);
+	}
 }
-                </code>
-<a href="https://www.youtube.com/watch?v=SMaWdFMVNa0&list=PL-LLg2yfNxZ6sOSMs9zwAYbDAgYDs44Oj">'Searching with Sitecore 7' on Youtube</a>
+            </code>
             </pre>
         </div>
 
-        <div class="step evolve" data-x="3000" data-y="2000" data-rotate="0" data-transition="100">
-            <pre>
-            <code class="cs">
-public ISearchResult Search(SearchCriteria criteria)
-{
-    if (criteria == null || string.IsNullOrWhiteSpace(criteria.Text))
-        return new SearchResult();
-    var timer = new Sitecore.Diagnostics.HighResTimer(true);
-    var index = ContentSearchManager.GetIndex("sitecore_master_index");
-    using (var context = index.CreateSearchContext())
-    {
-        <span class="attention">Expression&lt;func&lt;SearchResultItem, bool&gt;&gt; predicate = PredicateBuilder.True&lt;SearchResultItem&gt;();</span>
-        <span class="attention">foreach(var entry in criteria.Text.Split(' '))</span>
-        <span class="attention">{</span>
-        <span class="attention">    predicate = predicate.And(i => i.Content == entry);</span>
-        <span class="attention">}</span>
-                
-        var queryable = context.GetQueryable&lt;SearchResultItem&gt;();
-        var result = queryable
-            .Where(predicate)
-            .Page(criteria.CurrentPage-1, criteria.PageSize)
-            <span class="attention">.FacetPivotOn(p => p.FacetOn(d => d["categories"]).FacetOn(d => d["haspoint"]))</span>
-            .GetResults();
-        return new SearchResult()
-        {
-            ResultDocuments = result.Hits.Select(hit => hit.Document).ToList(),
-            Facets = CollectFacets(result.Facets.Categories),
-            TotalSearchResults = result.TotalSearchResults,
-            TotalMilliseconds = timer.ElapsedTimeSpan.Milliseconds;
-        };
-    }
-}
-                </code>
-<a href="https://www.youtube.com/watch?v=SMaWdFMVNa0&list=PL-LLg2yfNxZ6sOSMs9zwAYbDAgYDs44Oj">'Searching with Sitecore 7' on Youtube</a>
-            </pre>
-        </div>
+
 
         <div class="step" data-x="4500" data-y="1500" data-z="1000">
             <div class="headersq">
