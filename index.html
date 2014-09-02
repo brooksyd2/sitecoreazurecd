@@ -124,7 +124,9 @@ public AzureDeployments GetDeployments()
 		foreach (var environment in environments)
 		{
 			//Create new environment
-			var azureEnvironment = new AzureEnvironment { EnvironmentId = environment.EnvironmentId, Environment = environment.DisplayName };
+			var azureEnvironment = new AzureEnvironment { 
+			EnvironmentId = environment.EnvironmentId, 
+			Environment = environment.DisplayName };
 
 			foreach (var deployment in environment.GetDeployments())
 			{
@@ -151,7 +153,8 @@ public AzureDeployments GetDeployments()
 	else
 	{
 		//Log action
-		Log.Info(string.Format("No deployments found for Subscription ID : {0}", _configurationProvider.Settings.SubscriptionId), this);
+		Log.Info(string.Format("No deployments found for Subscription ID : {0}", 
+		_configurationProvider.Settings.SubscriptionId), this);
 	}
 
 	return azureDeployments;
@@ -163,35 +166,22 @@ public AzureDeployments GetDeployments()
         <div class="step evolve" data-x="2200" data-y="3000" data-rotate-z="15" data-z="-500">
             <pre>
             <code class="cs">
-// Service interface
-public interface ISearchService
+public void UpdateFiles()
 {
-    ISearchResult Search(SearchCriteria criteria);
-}
-// Concrete decorator will wrap my concrete service
-public class CachingSearchServiceDecorator : ISearchService
-{
-    private readonly ISearchService concreteService;
-    private readonly ICache&lt;ISearchResult&gt; cache;
-    
-    public CachingSearchServiceDecorator(<span class="attention">ISearchService concreteService</span>, ICache&lt;ISearchResult&gt; cache)
-    {
-        this.concreteService = concreteService;
-        this.cache = cache;
-    }
-    public ISearchResult Search(SearchCriteria criteria)
-    {
-        var key = "CachingSearchServiceDecorator";
-        if (criteria != null)
-        {
-            key += criteria.GetHashCode().ToString();
-        }
-        <span class="attention">if (!cache.ContainsKey(key))</span>
-        <span class="attention">{</span>
-        <span class="attention">    cache.AddEntity(key, concreteService.Search(criteria));</span>
-        <span class="attention">}</span>
-        <span class="attention">return cache.GetEntity(key);</span>
-    }
+	//If no subscriptionId passed in parameters then use configuration provided id
+	var subscriptionId = _configurationProvider.Settings.SubscriptionId;
+
+	//Get list of environments
+	IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
+		Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(subscriptionId);
+
+	//Loop through environments and deployments
+	foreach (var deployment in environments.SelectMany(environment => AzureDeploymentManager.Current.GetDeployments(environment)))
+	{
+		AzureDeploymentManager.Current.UpgradeDeploymentAsync(deployment);
+
+		Log.Info(string.Format("Updated deployment : {0}", deployment.DisplayName), this);
+	}
 }
             </code>
             </pre>
