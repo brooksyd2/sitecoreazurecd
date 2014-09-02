@@ -272,8 +272,65 @@ public void UpdateFiles()
             </code>
             </pre>
         </div>
+		
+		<div class="step" data-x="7300" data-y="3300" data-rotate-z="90" data-z="-1500">
+            <pre>
+            <code class="cs">
+	public void SwapDeployments()
+	{
+		//If no subscriptionId passed in parameters then use configuration provided id
+		var subscriptionId = _configurationProvider.Settings.SubscriptionId;
 
+		//Get list of environments
+		IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
+			Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(subscriptionId);
 
+		//Loop through environments and deployments
+		foreach (var deployment in environments.SelectMany(environment => AzureDeploymentManager.Current.GetDeployments(environment)))
+		{
+			AzureDeploymentManager.Current.SwapAsync(deployment);
+
+			Log.Info(string.Format("Swapped deployment : {0}", deployment.DisplayName), this);
+		}
+	}
+            </code>
+            </pre>
+        </div>
+
+		<div class="step evolve" data-x="7300" data-y="3300" data-rotate-z="90" data-z="-1500">
+            <pre>
+            <code class="cs">
+	public void SwapDeployments()
+	{
+		//If no subscriptionId passed in parameters then use configuration provided id
+		var subscriptionId = _configurationProvider.Settings.SubscriptionId;
+
+		//Get list of environments
+		IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
+			Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(subscriptionId);
+
+		//Loop through environments and deployments
+		foreach (var deployment in environments.SelectMany(environment => AzureDeploymentManager.Current.GetDeployments(environment)))
+		{
+			<spam class="attention">AzureDeploymentManager.Current.SwapAsync(deployment)</span>;
+
+			Log.Info(string.Format("Swapped deployment : {0}", deployment.DisplayName), this);
+		}
+	}
+            </code>
+            </pre>
+        </div>
+		
+		<div class="step" data-x="9300" data-y="3300">
+            <p style="text-align:left; line-height: 1; font-size: 90px;">
+                <span class="muted">
+					1) ARCHITECTURE<br />
+
+                    2) CODE<br />
+                </span>
+                    3) DISCO
+            </p>
+        </div>
 
         <div class="step" data-x="6500" data-y="7000" data-z="1000">
             <p style="text-align:center; line-height: 1; font-size: 60px;">
