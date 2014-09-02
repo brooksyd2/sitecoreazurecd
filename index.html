@@ -276,34 +276,10 @@ public void UpdateFiles()
 
 
         <div class="step" data-x="4500" data-y="1500" data-z="1000">
-            <div class="headersq">
-                <div class="outerContainer"><div class="innerContainer">Predicate Builder</div></div>
-            </div>
-            <div class="rightcontent">
-                <ul style="list-style: disc; padding-left: 50px; font-size: 80%;">
-                    <li>When you need flow-control when building query</li>
-                    <li>And() / Or() / Not() / Create() / True() / False()</li>
-                    <li>Be careful when 'chaining' of predicates:<br /><i>predicate = predicate.And(...);</i></li>
-                </ul>
-                <p style="font-size: 80%;">
-                    <br />
-                    Comparison IQueryable and PredicateBuilder approach:
-                    <br />
-                    <br />
-                </p>
-                <pre style="font-size: 50%; font-family: Consolas, monospace, sans-serif;">
-var predicate = PredicateBuilder.True&lt;SearchResultItem&gt;()
-    .And(i => i.PropA == "a")
-    .And(i => i.PropB == "b");
-var count = queryable
-    .Where(predicate).Count();
-</pre>
-                <hr />
-                <pre style="font-size: 50%; font-family: Consolas, monospace, sans-serif;">
-var count = queryable
-    .Where(i => i.PropA == "a" && i.PropB == "b").Count();
-                </pre>
-            </div>
+            <p style="text-align:center; line-height: 1; font-size: 60px;">
+                <img src="images/disco.png" width="100%" /><br />
+                Deployment Success!
+            </p>
         </div>
 
         <div class="step" data-x="4500" data-y="2000" data-z="150">
