@@ -355,7 +355,7 @@ public void UpdateFiles()
 		<div class="step" data-x="-2000" data-y="2000" data-rotate="180">
             <pre>
             <code class="cs" style="font-size: 25%;">
-				<UpgradeDeployment patch:source="Sitecore.Azure.config">
+				"<UpgradeDeployment patch:source="Sitecore.Azure.config">
 					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.ResolveSources, Sitecore.Azure"/>
 					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.CreatePackage, Sitecore.Azure"/>
 					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Upload, Sitecore.Azure"/>
@@ -363,7 +363,7 @@ public void UpdateFiles()
 					<processor type="Sitecore.Azure.Pipelines.UpgradeDeployment.WaitForInitialization, Sitecore.Azure"/>
 					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Finalize, Sitecore.Azure"/>
 					<span class="attention">Add processor for monitoring here</span>
-				</UpgradeDeployment>
+				</UpgradeDeployment>"
             </code>
             </pre>
         </div>
