@@ -536,7 +536,7 @@ body     { pointer-events: none; }
 .rightmargin {
 	margin: 0 0px 0 20px !important;
 }
-.spanadjust code span {
+.spanadjust code > span {
 	margin-left: -200px !important;
 }
 .headersq
