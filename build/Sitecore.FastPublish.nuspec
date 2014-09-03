@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Sitecore.Pegasus</id>
+    <version>0.0.1</version>
+    <title>Sitecore Pegasus - Automated Sitecore Azure deployments</title>
+    <authors>Damian Brooks</authors>
+    <owners>Sitecore Technical Services UK</owners>
+    <licenseUrl>http://www.sitecore.net</licenseUrl>
+    <projectUrl>http://www.sitecore.net</projectUrl>
+    <iconUrl>https://s.gravatar.com/avatar/f2cac040cabd4487535af67c855ff521?s=80</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This project introduces a service layer to allow HTPP Requests to automate Sitecore Azure deployment processes.</releaseNotes>
+    <tags>Sitecore, Azure, Deployment</tags>
+	<language>en-GB</language>
+    <dependencies>
+    </dependencies>
+  </metadata>
+    <files>
+    <file src="..\src\Sitecore.Pegasus\bin\Debug\Sitecore.Pegasus.dll" target="lib\net40" />
+    <file src="..\src\Sitecore.Pegasus\bin\Debug\Sitecore.Pegasus.Core.dll" target="lib\net40" />
+    <file src="..\src\Sitecore.Pegasus\bin\Debug\Sitecore.Pegasus.Core.pdb" target="lib\net40" />
+    <file src="..\src\Sitecore.Pegasus\bin\Debug\Sitecore.Pegasus.pdb" target="lib\net40" />
+    
+    <file src="..\src\Sitecore.FastPublish\content\**\*" target="content" />
+  </files>
+</package>
