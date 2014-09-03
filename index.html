@@ -30,11 +30,11 @@
             </div>
             <div class="undercontent">
                 <p>
-					This presentation will describe an approach to using Sitecore Azure within a continous delivery pipeline.
+					This presentation will describe an approach to using Sitecore Azure within a Continuous Delivery pipeline.
                 </p>
                 <p>
                     <br />
-					This is not about Continuous Delivery/Deployment, but about how Sitecore Azure fits into those methodologies
+					<i>This is not about Continuous Delivery/Deployment, but about how Sitecore Azure fits into those methodologies.</i>
                 </p>
             </div>
         </div>
@@ -70,11 +70,11 @@
         <div class="step" data-x="-1000" data-y="5000">
 			<div class="rightcontent">
                 <p>
-                    Once code and content is deployed to Content Management, then the Sitecore Azure module is invoked via HTTP Requests to start the deployment process, and later the role swap process. 
+                    Once code and content is deployed to the Content Management server, then the Sitecore Azure module is invoked via HTTP Requests to start the deployment process, and later the role swap process. The code provides the HTTP Request interface. 
                 </p>
             </div>
-			<div class="headersq">
-                <div class="outerContainer"><div class="innerContainer">What Our Code Will Do?</div></div>
+			<div class="headersq rightmargin">
+                <div class="outerContainer"><div class="innerContainer">What the Code Will Do?</div></div>
             </div>
         </div>
 
@@ -103,7 +103,7 @@
             </div>
             <div class="rightcontent">
                 <p>
-                    We require a Sitecore context to run the Sitecore Azure commands, therefore we need to intercept HTTP requests. 
+                    We require a Sitecore context to run the Sitecore Azure commands, therefore we need to intercept HTTP requests via the HttpRequestBegin pipeline. 
 					When invoked, the service will find deployments for given subscription, and call 'Upgrade Files' command.
                 </p>
             </div>
