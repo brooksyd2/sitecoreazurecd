@@ -534,7 +534,7 @@ body     { pointer-events: none; }
     font-size: 80%;
 }
 .rightmargin {
-	.margin: 0 0px 0 20px !important;
+	margin: 0 0px 0 20px !important;
 }
 .headersq
 {

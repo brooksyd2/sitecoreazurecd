@@ -312,7 +312,7 @@ public void UpdateFiles()
 		//Loop through environments and deployments
 		foreach (var deployment in environments.SelectMany(environment => AzureDeploymentManager.Current.GetDeployments(environment)))
 		{
-			<spam class="attention">AzureDeploymentManager.Current.SwapAsync(deployment)</span>;
+			<span class="attention">AzureDeploymentManager.Current.SwapAsync(deployment)</span>;
 
 			Log.Info(string.Format("Swapped deployment : {0}", deployment.DisplayName), this);
 		}
