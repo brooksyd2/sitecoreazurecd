@@ -355,15 +355,15 @@ public void UpdateFiles()
 		<div class="step" data-x="-2000" data-y="2000" data-rotate="180">
             <pre>
             <code class="xml" style="font-size: 25%;">
-				<xmp><UpgradeDeployment patch:source="Sitecore.Azure.config">
-					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.ResolveSources, Sitecore.Azure"/>
-					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.CreatePackage, Sitecore.Azure"/>
-					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Upload, Sitecore.Azure"/>
-					<processor type="Sitecore.Azure.Pipelines.UpgradeDeployment.Upgrade, Sitecore.Azure"/>
-					<processor type="Sitecore.Azure.Pipelines.UpgradeDeployment.WaitForInitialization, Sitecore.Azure"/>
-					<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Finalize, Sitecore.Azure"/>
+				&ltUpgradeDeployment patch:source="Sitecore.Azure.config"&gt
+					&ltprocessor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.ResolveSources, Sitecore.Azure"/&gt
+					&ltprocessor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.CreatePackage, Sitecore.Azure"/&gt
+					&ltprocessor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Upload, Sitecore.Azure"/&gt
+					&ltprocessor type="Sitecore.Azure.Pipelines.UpgradeDeployment.Upgrade, Sitecore.Azure"/&gt
+					&ltprocessor type="Sitecore.Azure.Pipelines.UpgradeDeployment.WaitForInitialization, Sitecore.Azure"/&gt
+					&ltprocessor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Finalize, Sitecore.Azure"/&gt
 					<span class="attention">Add processor for monitoring here</span>
-				</UpgradeDeployment></xmp>
+				&lt/UpgradeDeployment&gt
             </code>
             </pre>
         </div>
