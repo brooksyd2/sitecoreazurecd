@@ -368,7 +368,7 @@ public void UpdateFiles()
             </pre>
         </div>
 		
-		<div class="step" data-x="-2000" data-y="1000" data-rotate="180">
+		<div class="step" data-x="-2000" data-y="1000" data-rotate="150">
             <pre class="spanadjust">
             <code class="cs" style="font-size: 25%;">
 				&lt;SwapAzureDeployment patch:source="Sitecore.Azure.config"&gt;
@@ -377,111 +377,6 @@ public void UpdateFiles()
 				&lt;/SwapAzureDeployment&gt;
             </code>
             </pre>
-        </div>
-
-        <div class="step" data-x="-2000" data-y="0" data-rotate="150">
-            <pre>
-            <code class="cs">
-var index = ContentSearchManager.GetIndex("sitecore_master_index") <span class="attention">as SpatialLuceneIndex</span>;
-using (var context = index.CreateSearchContext() <span class="attention">as SpatialLuceneSearchContext</span>)
-{
-    if (criteria.PointRadius != null)
-    {
-            <span class="attention">context.SetGeoFilter</span>(new PointRadiusCriterion()
-        {
-            FieldName = "_geohash",
-            RadiusKm = criteria.PointRadius.RadiusKm,
-            Latitude = criteria.PointRadius.Latitude,
-            Longitude = criteria.PointRadius.Longitude,
-            Sort = PointRadiusCriterion.SortOption.Ascending
-        });
-    }
-    var queriable = context.GetQueryable&lt;SearchResultItem&gt;();
-    //...
-                </code>
-            </pre>
-            <p style="font-size: 50%;"><a href="https://github.com/herskinduk/Usergroup.Sugnl">See the Usergroup.Sugnl repo on Github</a></p>
-        </div>
-
-        <div class="step" data-x="-2000" data-y="-1000" data-rotate="180">
-            <div style="width: 45%; height:100%; align-content:center; float:left;">
-                <p style="text-align:left; line-height: 1; font-size: 80%">
-                    Provided 'as is',
-                    results may vary,
-                    terms and conditions apply
-                </p>
-            </div>
-            <div style="width: 45%; height:100%; align-content:center; float:right;">
-                <p style="text-align:left; line-height: 1; font-size: 80%;">
-                    Known issue: Spatial filter does not apply to facet results
-                </p>
-            </div>
-        </div>
-
-        <div class="step" data-x="-4000" data-y="2000" data-rotate="0">
-            <p style="text-align:left; line-height: 1; font-size: 90px;">
-                <span class="muted">
-                    1) SEARCH EXAMPLE<br />
-                    2) OFF-PISTE: GEO<br />
-                </span>
-                3) TIPS AND TRICKS
-            </p>
-        </div>
-
-        <div class="step" data-x="-4000" data-y="3000">
-            <div class="header">
-                Tip: LinqPad + Sitecore = &#10084;
-            </div>
-            <div class="undercontent">
-                <p style="text-align:center;">
-                    <img src="images/linqpad.png" style="width:100%; " />
-                </p>
-                <p style="text-align:center; line-height: 1; font-size: 80%;">
-                    <a href="http://www.sitecore.net/Community/Technical-Blogs/Getting-to-Know-Sitecore/Posts/2014/03/LINQPad-Driver-for-Sitecore.aspx">See Adam Conn's blog post for more info</a>
-                </p>
-            </div>
-        </div>
-
-
-        <div class="step" data-x="-4000" data-y="4000" data-rotate="0">
-            <pre>
-            <code class="cs">
-public class MyComputedField : IComputedIndexField
-{
-    //
-    // Tip: Constructor interrogates field configuration to find custom paramaters
-    //
-    public MyComputedField(XmlNode configNode)
-    {
-        string sourceFieldName = XmlUtil.GetAttribute("sourceFieldName", configNode, true);
-        this.SourceFieldName = sourceFieldName;
-    }
-    
-    public string SourceFieldName { get; set; }
-    //...
-                </code>
-            </pre>
-            <p style="font-size: 50%;"><a href="https://github.com/herskinduk/Usergroup.Sugnl">See the Usergroup.Sugnl repo on Github</a></p>
-        </div>
-
-
-        <div class="step" data-x="-2000" data-y="4000" data-rotate="0">
-            <pre>
-            <code class="cs">
-//
-// Tip: Turn off Indexing and eventing when bulk loading data into Sitecore
-//
-Sitecore.Configuration.Settings.Indexing.Enabled = false;
-using (new EventDisabler())
-{
-    //
-    // Bulk insertion of items goes here...
-    //
-}
-Sitecore.Configuration.Settings.Indexing.Enabled = true;
-                </code>
-            </pre>
-            <p style="font-size: 50%;"><a href="https://github.com/herskinduk/Usergroup.Sugnl">See the Usergroup.Sugnl repo on Github</a></p>
         </div>
 
         <div class="step" data-x="-2000" data-y="3000" data-rotate="30">
