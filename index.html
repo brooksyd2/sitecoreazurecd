@@ -268,7 +268,8 @@ public void UpdateFiles()
 		Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(subscriptionId);
 
 	//Loop through environments and deployments
-	foreach (var deployment in environments.SelectMany(environment => AzureDeploymentManager.Current.GetDeployments(environment)))
+	foreach (var deployment in environments.SelectMany(
+		environment => AzureDeploymentManager.Current.GetDeployments(environment)))
 	{
 		AzureDeploymentManager.Current.UpgradeDeploymentAsync(deployment);
 
@@ -292,7 +293,8 @@ public void UpdateFiles()
 		<span class="attention">Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(subscriptionId)</span>;
 
 	//Loop through environments and deployments
-	foreach (var deployment in environments.SelectMany(environment => AzureDeploymentManager.Current.GetDeployments(environment)))
+	foreach (var deployment in environments.SelectMany(
+		environment => AzureDeploymentManager.Current.GetDeployments(environment)))
 	{
 		<span class="attention">AzureDeploymentManager.Current.UpgradeDeploymentAsync(deployment)</span>;
 
@@ -378,6 +380,7 @@ public void UpdateFiles()
             <div class="rightcontent">
 				<p style="text-align:center; line-height: 1; font-size: 30px;">
 					Sitecore Azure does not provide any alerting out of the box. When used in a CD pipeline, this means that the final deployment could fail (or succeed) without alerting anyone. 
+					<br />
 				</p>
 				<p style="text-align:center; line-height: 1; font-size: 30px;">
 					To get around this, add a pipeline processor into the 'UpgradeDeployment' pipeline.
