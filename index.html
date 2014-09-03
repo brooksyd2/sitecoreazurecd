@@ -110,7 +110,7 @@
         </div>
 
         <div class="step" data-x="3500" data-y="3000" data-rotate-z="15" data-z="-500">
-            <pre>
+            <pre class="spanadjust">
             <code class="cs" style="font-size: 25%;">
 public AzureDeployments GetDeployments()
 {
@@ -168,7 +168,7 @@ public AzureDeployments GetDeployments()
         </div>
 		
 		<div class="step evolve" data-x="3500" data-y="3000" data-rotate-z="15" data-z="-500">
-            <pre>
+            <pre class="spanadjust">
             <code class="cs" style="font-size: 25%;">
 public AzureDeployments GetDeployments()
 {
@@ -226,7 +226,7 @@ public AzureDeployments GetDeployments()
         </div>
 
         <div class="step" data-x="5300" data-y="3300" data-rotate-z="90" data-z="-1500">
-            <pre>
+            <pre class="spanadjust">
             <code class="cs" style="font-size: 25%;">
 public void UpdateFiles()
 {
@@ -250,7 +250,7 @@ public void UpdateFiles()
         </div>
 		
         <div class="step evolve" data-x="5300" data-y="3300" data-rotate-z="90" data-z="-1500">
-            <pre>
+            <pre class="spanadjust">
             <code class="cs" style="font-size: 25%;">
 public void UpdateFiles()
 {
@@ -274,7 +274,7 @@ public void UpdateFiles()
         </div>
 		
 		<div class="step" data-x="7300" data-y="3300" data-rotate-z="90" data-z="-1500">
-            <pre>
+            <pre class="spanadjust">
             <code class="cs" style="font-size: 25%;">
 	public void SwapDeployments()
 	{
@@ -347,7 +347,7 @@ public void UpdateFiles()
             </div>
             <div class="rightcontent">
 				<p style="text-align:center; line-height: 1; font-size: 30px;">
-					Sitecore Azure does not provide any alerting out of the box. When used in a CD pipeline, this means that the ifnal deployment could fail without alerting anyone. To get around this, add a pipeline processor into the 'UpgradeDeployment' pipeline.
+					Sitecore Azure does not provide any alerting out of the box. When used in a CD pipeline, this means that the final deployment could fail (or succeed) without alerting anyone. To get around this, add a pipeline processor into the 'UpgradeDeployment' pipeline.
 				</p>
             </div>
         </div>
@@ -369,12 +369,12 @@ public void UpdateFiles()
         </div>
 		
 		<div class="step" data-x="-2000" data-y="1000" data-rotate="180">
-            <pre>
+            <pre class="spanadjust">
             <code class="cs" style="font-size: 25%;">
-				<SwapAzureDeployment patch:source="Sitecore.Azure.config">
-					<processor type="Sitecore.Azure.Pipelines.SwapAzureDeployment.SwapAzureDeployment, Sitecore.Azure"/>
+				&lt;SwapAzureDeployment patch:source="Sitecore.Azure.config"&gt;
+					&lt;processor type="Sitecore.Azure.Pipelines.SwapAzureDeployment.SwapAzureDeployment, Sitecore.Azure"/&gt;
 					<span class="attention">Add processor for monitoring here</span>
-				</SwapAzureDeployment>
+				&lt;/SwapAzureDeployment&gt;
             </code>
             </pre>
         </div>
