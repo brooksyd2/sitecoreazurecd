@@ -5,11 +5,7 @@ Sitecore Pegasus introduces a simple HTTP Request layer, captured through the Si
 
 ## Instructions for Use
 
-The latest release versions of the Sitecore.Ship packages can be found on the NuGet gallery:
-
-* [Sitecore.Ship](http://www.nuget.org/packages/Sitecore.Ship/) 
-* [Sitecore.Ship.AspNet](http://www.nuget.org/packages/Sitecore.Ship.AspNet/) 
-
+The latest release versions of the Sitecore.Pegasus package can be found in the build directory
 
 ### Installing the Package
 

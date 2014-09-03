@@ -1,4 +1,7 @@
-﻿using Sitecore.Diagnostics;
+﻿using System.Configuration;
+using Sitecore.Diagnostics;
+using Sitecore.Pegasus.Core.Configuration;
+using Sitecore.Pegasus.Core.Services;
 using Sitecore.Pipelines.HttpRequest;
 
 namespace Sitecore.Pegasus.Processor
@@ -9,6 +12,15 @@ namespace Sitecore.Pegasus.Processor
         {
             Assert.ArgumentNotNull((object)args, "args");
 
+            var deploymentSettings = new AzureDeploymentConfigurationProvider();
+
+            if (deploymentSettings.Settings == null || !Sitecore.Context.RawUrl.Contains(deploymentSettings.Settings.RequestPath)) return;
+
+            var deploymentService = new AzureDeploymentService(deploymentSettings);
+
+            deploymentService.UpdateFiles();
+
+            args.AbortPipeline();
         }
     }
 }

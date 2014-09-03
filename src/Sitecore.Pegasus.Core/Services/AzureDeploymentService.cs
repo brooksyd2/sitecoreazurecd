@@ -10,7 +10,7 @@ using Sitecore.Pegasus.Core.Models;
 
 namespace Sitecore.Pegasus.Core.Services
 {
-    public class AzureDeploymentService 
+    public class AzureDeploymentService : IAzureDeploymentService
     {
         private readonly IConfigurationProvider<AzureDeploymentSettings> _configurationProvider;
 

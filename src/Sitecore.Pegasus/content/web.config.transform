@@ -3,5 +3,5 @@
   <configSections>
     <section name="azuredeployment" type="Sitecore.Pegasus.Configuration.AzureDeploymentConfiguration, Sitecore.Pegasus" />
   </configSections>
-  <azuredeployment enabled="true" subscriptionId="" requestPath="/sitecoreapi/azure/deploy" />
+  <azuredeployment enabled="true" subscriptionId="47cb3090-6219-4c25-a75e-98b0b96148eb" requestPath="/sitecoreapi/azure/" />
 </configuration>

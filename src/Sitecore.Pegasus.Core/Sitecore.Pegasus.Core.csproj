@@ -37,6 +37,7 @@
       <HintPath>..\..\lib\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AzureDeploymentConfiguration.cs" />
+    <Compile Include="Configuration\AzureDeploymentConfigurationProvider.cs" />
     <Compile Include="Interfaces\IAzureDeploymentService.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Models\AzureDeployment.cs" />

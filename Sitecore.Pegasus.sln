@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{80E696
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPublish.Web", "..\Pegasus - Sitecore Solution\FastPublish.Web\FastPublish.Web\FastPublish.Web.csproj", "{CD94BBDA-61EB-426B-A305-66A9F6939467}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{5051B535-2946-4945-99D3-DDDA9910CB85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5051B535-2946-4945-99D3-DDDA9910CB85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5051B535-2946-4945-99D3-DDDA9910CB85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD94BBDA-61EB-426B-A305-66A9F6939467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD94BBDA-61EB-426B-A305-66A9F6939467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD94BBDA-61EB-426B-A305-66A9F6939467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD94BBDA-61EB-426B-A305-66A9F6939467}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,5 +51,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{52881DAE-A45D-4694-9F97-DE367590D4EE} = {C27F4C7F-140A-44FA-8B29-5C09C1937691}
 		{5051B535-2946-4945-99D3-DDDA9910CB85} = {C27F4C7F-140A-44FA-8B29-5C09C1937691}
+		{CD94BBDA-61EB-426B-A305-66A9F6939467} = {C27F4C7F-140A-44FA-8B29-5C09C1937691}
 	EndGlobalSection
 EndGlobal

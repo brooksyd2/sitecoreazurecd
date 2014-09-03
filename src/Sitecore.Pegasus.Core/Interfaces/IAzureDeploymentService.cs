@@ -11,5 +11,6 @@ namespace Sitecore.Pegasus.Core.Interfaces
     {
         AzureDeployments GetDeployments();
         void UpdateFiles();
+        void SwapDeployments();
     }
 }
