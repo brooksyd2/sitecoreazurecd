@@ -536,6 +536,9 @@ body     { pointer-events: none; }
 .rightmargin {
 	margin: 0 0px 0 20px !important;
 }
+.spanadjust span {
+	margin-left: -200px !important;
+}
 .headersq
 {
     box-sizing: border-box;
