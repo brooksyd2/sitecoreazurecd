@@ -343,17 +343,22 @@ public void UpdateFiles()
 
         <div class="step" data-x="8500" data-y="5000" data-z="150">
             <div class="headersq">
-                <div class="outerContainer"><div class="innerContainer">Facet and Facet Pivet</div></div>
+                <div class="outerContainer"><div class="innerContainer">Alerting and Monitoring Deployments</div></div>
             </div>
             <div class="rightcontent">
-                <ul style="list-style: disc; padding-left: 50px; font-size: 80%;">
-                    <li>Facets: Predict number of results if you where to filter on a facet whithin current query</li>
-                    <li>Pivot Facet: Create decision tree of predictions</li>
-                    <li>
-                        Note that Sitecore always returns a flat list - imagine a filter on 'category' (id) and 'haspoint' (bool):<br /><img src="images/pivotfacetresult.png" style="height: 400px; margin: 25px 0 0 0;" />
-                    </li>
-                </ul>
-
+            <p style="text-align:center; line-height: 1; font-size: 60px;">
+                Sitecore Azure does not provide any alerting out of the box. When used in a CD pipeline, this means that the ifnal deployment could fail without alerting anyone. To get around this, add a pipeline processor into the 'UpgradeDeployment' pipeline.
+            </p>
+				<code class="cs" style="font-size: 25%;">
+				<UpgradeDeployment patch:source="Sitecore.Azure.config">
+				<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.ResolveSources, Sitecore.Azure"/>
+				<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.CreatePackage, Sitecore.Azure"/>
+				<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Upload, Sitecore.Azure"/>
+				<processor type="Sitecore.Azure.Pipelines.UpgradeDeployment.Upgrade, Sitecore.Azure"/>
+				<processor type="Sitecore.Azure.Pipelines.UpgradeDeployment.WaitForInitialization, Sitecore.Azure"/>
+				<processor type="Sitecore.Azure.Pipelines.DeployAndRun.Azure.Finalize, Sitecore.Azure"/>
+				</UpgradeDeployment>
+				</code>
             </div>
         </div>
 
