@@ -111,7 +111,7 @@
 
         <div class="step" data-x="3500" data-y="3000" data-rotate-z="15" data-z="-500">
             <pre>
-            <code class="cs">
+            <code class="cs" style="font-size: 25%;">
 public AzureDeployments GetDeployments()
 {
 
@@ -120,8 +120,8 @@ public AzureDeployments GetDeployments()
 	};
 
 	//Get list of environments
-	IEnumerable<Sitecore.Azure.Deployments.Environments.Environment> environments =
-		Sitecore.Azure.Deployments.Environments.Environment.GetEnvironments(azureDeployments.SubscriptionId);
+	IEnumerable<Environments.Environment> environments =
+		Environments.Environment.GetEnvironments(azureDeployments.SubscriptionId);
 
 	if (environments != null)
 	{
@@ -169,7 +169,7 @@ public AzureDeployments GetDeployments()
 		
 		<div class="step evolve" data-x="3500" data-y="3000" data-rotate-z="15" data-z="-500">
             <pre>
-            <code class="cs">
+            <code class="cs" style="font-size: 25%;">
 public AzureDeployments GetDeployments()
 {
 
@@ -227,7 +227,7 @@ public AzureDeployments GetDeployments()
 
         <div class="step" data-x="5300" data-y="3300" data-rotate-z="90" data-z="-1500">
             <pre>
-            <code class="cs">
+            <code class="cs" style="font-size: 25%;">
 public void UpdateFiles()
 {
 	//If no subscriptionId passed in parameters then use configuration provided id
@@ -251,7 +251,7 @@ public void UpdateFiles()
 		
         <div class="step evolve" data-x="5300" data-y="3300" data-rotate-z="90" data-z="-1500">
             <pre>
-            <code class="cs">
+            <code class="cs" style="font-size: 25%;">
 public void UpdateFiles()
 {
 	//If no subscriptionId passed in parameters then use configuration provided id
@@ -275,7 +275,7 @@ public void UpdateFiles()
 		
 		<div class="step" data-x="7300" data-y="3300" data-rotate-z="90" data-z="-1500">
             <pre>
-            <code class="cs">
+            <code class="cs" style="font-size: 25%;">
 	public void SwapDeployments()
 	{
 		//If no subscriptionId passed in parameters then use configuration provided id
@@ -299,7 +299,7 @@ public void UpdateFiles()
 
 		<div class="step evolve" data-x="7300" data-y="3300" data-rotate-z="90" data-z="-1500">
             <pre>
-            <code class="cs">
+            <code class="cs" style="font-size: 25%;">
 	public void SwapDeployments()
 	{
 		//If no subscriptionId passed in parameters then use configuration provided id
